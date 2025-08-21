@@ -23,12 +23,12 @@ class AcceptAIDirectRequestPage extends BasePage {
 
   async acceptAndSubmitQuote(filePath, amount = '1234', comments = 'Test Comments') {
     
-    await this.waitForVisible(this.eventDirectory);
-    await this.click(this.eventDirectory);
+    // await this.waitForVisible(this.eventDirectory);
+    // await this.click(this.eventDirectory);
 
-
-    await this.waitForVisible(this.activeEventsTab);
-    await this.click(this.activeEventsTab);
+    // await this.page.waitForTimeout(2000);
+    // await this.waitForVisible(this.activeEventsTab);
+    // await this.click(this.activeEventsTab);
 
     await this.page.waitForTimeout(2000);
     await this.waitForVisible(this.userAIDirectRequestTab);
