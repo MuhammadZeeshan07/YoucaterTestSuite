@@ -16,11 +16,17 @@ class AcceptAIDirectRequestPage extends BasePage {
     this.submitQuoteBtn = 'xpath=//button[text()="Submit quote"]';
     this.goToChat = 'xpath=//button[contains(text(),"Go to chat")]';
     this.sendMessage = '#sendbird-message-input-text-field';
+    this.eventDirectory = 'xpath=//span[contains(text(), "Event Directory")]';
 
 
   }
 
   async acceptAndSubmitQuote(filePath, amount = '1234', comments = 'Test Comments') {
+    
+    await this.waitForVisible(this.eventDirectory);
+    await this.click(this.eventDirectory);
+
+
     await this.waitForVisible(this.activeEventsTab);
     await this.click(this.activeEventsTab);
 
