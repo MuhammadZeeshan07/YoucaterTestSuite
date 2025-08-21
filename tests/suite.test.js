@@ -70,8 +70,9 @@ test.describe.serial('YouCater End-to-End Suite', () => {
 
   test('Accept the Direct Request', async () => {
     const acceptDirectRequestPage = new AcceptDirectRequest(partnerPage);
+    const fileToUpload = path.resolve(__dirname, '../utils/Sample.pdf');
     await acceptDirectRequestPage.acceptAndSubmitQuote(
-      'C:/Zeeshan Data/my desktop data/RobotTestCases/Sample.pdf',
+      fileToUpload,
       '1234',
       'Test Comments'
     );
@@ -109,8 +110,9 @@ test.describe.serial('YouCater End-to-End Suite', () => {
 
   test('Decline Direct Request and Reopen', async () => {
     const declineRequestPage = new DeclineRequestAndReopenPage(partnerPage);
+    const fileToUpload = path.resolve(__dirname, '../utils/Sample.pdf');
     await declineRequestPage.declineAndReopen(
-      'C:/Zeeshan Data/my desktop data/RobotTestCases/Sample.pdf',
+      fileToUpload,
       '1234',
       'Test Comments'
     );
@@ -146,8 +148,9 @@ test.describe.serial('YouCater End-to-End Suite', () => {
 
   test('Accept the AI Direct Request', async () => {
     const acceptAIRequest = new AcceptAIDirectRequestPage(partnerPage);
+    const fileToUpload = path.resolve(__dirname, '../utils/Sample.pdf');
     await acceptAIRequest.acceptAndSubmitQuote(
-      'C:/Zeeshan Data/my desktop data/RobotTestCases/Sample.pdf',
+      fileToUpload,
       '1234',
       'Test Comments'
     );
