@@ -11,7 +11,7 @@ test('Vendor decline direct request and submits quote', async ({ page }) => {
     await loginPage.login(email, password);
 
     const declinePage = new DeclineRequestAndReopenPage(page);
-    const fileToUpload = 'C:/Zeeshan Data/my desktop data/RobotTestCases/Sample.pdf';
+    const fileToUpload = 'C:\\Users\\mztre\\OneDrive\\Desktop\\YouCater Automation\\utils\\Sample.pdf';
     await declinePage.declineAndReopen(fileToUpload, '1234', 'Test Comments');
 
 });
