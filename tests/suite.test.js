@@ -16,6 +16,7 @@ const EventCreationWithoutSubmissionPage = require('../pages/EventCreationWithou
 const AssignToVendorPage = require('../pages/AssignToVendorPage');
 const AcceptAIDirectRequestPage = require('../pages/AcceptAIDirectRequestPage');
 const testData = require('../utils/testData');
+const path = require('path');
 
 const { USER, PARTNER, ADMIN } = testData;
 
