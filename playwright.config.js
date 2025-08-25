@@ -19,11 +19,20 @@ module.exports = defineConfig({
     baseURL: 'https://dev.youcater.me/en/',
     launchOptions: {
       channel: 'chrome',
-      args: ['--start-maximized', '--disable-dev-shm-usage'], // optimize headless behavior
+      args: [
+       '--start-maximized', 
+       '--disable-dev-shm-usage',
+       '--no-sandbox',
+       '--disable-setuid-sandbox',
+       '--disable-background-timer-throttling',
+      '--disable-backgrounding-occluded-windows',
+       '--disable-renderer-backgrounding'
+       ],
     },
   viewport: { width: 1920, height: 1080 },
   isMobile: false,
   },
+
   projects: [
     {
       name: 'Chrome',
