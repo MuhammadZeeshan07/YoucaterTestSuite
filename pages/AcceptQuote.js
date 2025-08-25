@@ -51,8 +51,10 @@ class AcceptQuotePage extends BasePage {
         await this.fill(this.checkoutLocality, 'test');
         await this.fill(this.checkoutPostal, '123456');
 
+        await this.page.waitForTimeout(2000);
         await this.waitForVisible(this.submitPayment);
         await this.click(this.submitPayment);
+        await this.page.waitForTimeout(5000);
         await this.waitForVisible(this.backToEvent);
         await this.click(this.backToEvent);
     }
