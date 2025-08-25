@@ -19,7 +19,7 @@ class BasePage {
 
   async waitForVisible(selector, options = {}) {
     try {
-      await this.page.locator(selector).waitFor({ state: 'visible', timeout: 30000, ...options });
+      await this.page.locator(selector).waitFor({ state: 'visible', ...options });
     } catch (error) {
       if (this.page.isClosed()) {
         throw new Error(`Page was closed while waiting for selector: ${selector}`);
