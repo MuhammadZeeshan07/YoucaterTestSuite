@@ -41,6 +41,8 @@ class AcceptQuotePage extends BasePage {
         await this.waitForVisible(this.email);
         await this.fill(this.email, 'test@example.com');
 
+        // Wait for Stripe elements to load properly
+        await this.page.locator(this.stripeCardNo).waitFor({ state: 'visible' });
         await this.fill(this.stripeCardNo, '4242424242424242');
         await this.fill(this.stripeExp, '09 / 30');
         await this.fill(this.stripeCvc, '100');
@@ -51,11 +53,13 @@ class AcceptQuotePage extends BasePage {
         await this.fill(this.checkoutLocality, 'test');
         await this.fill(this.checkoutPostal, '123456');
 
-        await this.page.waitForTimeout(2000);
+        // Wait for submit button to be enabled/ready
         await this.waitForVisible(this.submitPayment);
+        await this.page.locator(this.submitPayment).waitFor({ state: 'visible' });
         await this.click(this.submitPayment);
-        await this.page.waitForTimeout(5000);
-        await this.waitForVisible(this.backToEvent);
+        
+        // Wait for payment processing and navigation with longer timeout for CI/CD
+        await this.waitForVisible(this.backToEvent, { timeout: 60000 });
         await this.click(this.backToEvent);
     }
 }

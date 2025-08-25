@@ -25,7 +25,9 @@ class EventEditPage extends BasePage {
   await this.waitForVisible(this.eventNameEditInput);
   await this.fill(this.eventNameEditInput, 'Test event uat');
   await this.page.locator('(//button[contains(@class,"h-[35px]")])[1]').click();
-  await this.page.waitForTimeout(1000);
+  
+  // Wait for the page to be ready before going back
+  await this.page.waitForLoadState('networkidle');
   await this.page.goBack();
 
   }
