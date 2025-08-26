@@ -1,6 +1,5 @@
 // pages/AcceptQuote.js
 const BasePage = require('./BasePage');
-
 class AcceptQuotePage extends BasePage {
     constructor(page) {
         super(page);
@@ -21,47 +20,33 @@ class AcceptQuotePage extends BasePage {
         this.submitPayment = 'div.SubmitButton-IconContainer';
         this.backToEvent = 'xpath=//button[contains(text(),"Back to event")]';
     }
-
     async acceptAndPayCard(testCard = '4242 4242 4242 4242') {
         await this.waitForVisible(this.eventTitle);
         await this.click(this.eventTitle);
-
         await this.waitForVisible(this.acceptCheckoutBtn);
         await this.click(this.acceptCheckoutBtn);
-
         await this.waitForVisible(this.acceptAndCheckoutLink);
         await this.click(this.acceptAndCheckoutLink);
-
         await this.waitForVisible(this.acceptedCheckbox);
         await this.click(this.acceptedCheckbox);
-
         await this.waitForVisible(this.paymentPanel);
         await this.click(this.paymentPanel);
-
         await this.waitForVisible(this.email);
         await this.fill(this.email, 'test@example.com');
-
-        // Wait for Stripe elements to load properly
-        await this.page.locator(this.stripeCardNo).waitFor({ state: 'visible' });
         await this.fill(this.stripeCardNo, '4242424242424242');
         await this.fill(this.stripeExp, '09 / 30');
         await this.fill(this.stripeCvc, '100');
-
         await this.fill(this.checkoutName, 'Test card');
         await this.fill(this.checkoutAddress1, 'test');
         await this.fill(this.checkoutAddress2, 'test');
         await this.fill(this.checkoutLocality, 'test');
         await this.fill(this.checkoutPostal, '123456');
-
-        // Wait for submit button to be enabled/ready
+        await this.page.waitForTimeout(2000);
         await this.waitForVisible(this.submitPayment);
-        await this.page.locator(this.submitPayment).waitFor({ state: 'visible' });
         await this.click(this.submitPayment);
-        
-        // Wait for payment processing and navigation with longer timeout for CI/CD
-        await this.waitForVisible(this.backToEvent, { timeout: 60000 });
+        await this.page.waitForTimeout(5000);
+        await this.waitForVisible(this.backToEvent);
         await this.click(this.backToEvent);
     }
 }
-
 module.exports = AcceptQuotePage;
