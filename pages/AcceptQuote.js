@@ -22,6 +22,7 @@ class AcceptQuotePage extends BasePage {
     }
     async acceptAndPayCard(testCard = '4242 4242 4242 4242') {
         await this.waitForVisible(this.eventTitle);
+        await this.page.locator(this.eventTitle).scrollIntoViewIfNeeded();
         await this.click(this.eventTitle);
         await this.waitForVisible(this.acceptCheckoutBtn);
         await this.click(this.acceptCheckoutBtn);
