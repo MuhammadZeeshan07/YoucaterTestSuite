@@ -13,14 +13,9 @@ class BasePage {
     await this.page.locator(selector).fill(value);
   }
   async waitForVisible(selector, options = {}) {
-    console.log(`Waiting for selector: ${selector}`);
     try {
-      // Wait for network to be idle before waiting for selector
-      await this.page.waitForLoadState('networkidle');
       await this.page.locator(selector).waitFor({ state: 'visible', ...options });
-      console.log(`Selector visible: ${selector}`);
     } catch (error) {
-      console.error(`Error waiting for selector: ${selector}`, error);
       if (this.page.isClosed()) {
         throw new Error(`Page was closed while waiting for selector: ${selector}`);
       }
