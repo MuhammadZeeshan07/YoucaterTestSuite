@@ -11,7 +11,7 @@ module.exports = defineConfig({
     ['list'],
   ],
   use: {
-    headless: process.env.CI ? true : false, // Headless only in CI
+    headless: true,
     ignoreHTTPSErrors: true,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
