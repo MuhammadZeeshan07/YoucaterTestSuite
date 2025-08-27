@@ -16,8 +16,6 @@ module.exports = defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     baseURL: 'https://dev.youcater.me/en/',
-    actionTimeout: 15000, // Increased action timeout
-    navigationTimeout: 30000, // Increased navigation timeout
     launchOptions: {
       channel: 'chrome',
       args: [
