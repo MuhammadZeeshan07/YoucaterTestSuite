@@ -14,7 +14,7 @@ module.exports = defineConfig({
     headless: true,
     ignoreHTTPSErrors: true,
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
+    video: 'on',
     baseURL: 'https://dev.youcater.me/en/',
     launchOptions: {
       channel: 'chrome',
