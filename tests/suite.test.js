@@ -1,8 +1,8 @@
 const { test, expect, chromium } = require('@playwright/test');
 const LoginPage = require('../pages/LoginPage');
 const EventCreationPage = require('../pages/EventCreationPage');
-const EventEditPage = require('../pages/eventDetails.page');
-const VendorRequestPage = require('../pages/directRequest.page');
+const EventEditPage = require('../pages/EventEditPage');
+const VendorRequestPage = require('../pages/directRequestpage');
 const StratPlanningFromHomePage = require('../pages/StratPlanningFromHomePage');
 const PartnerLoginPage = require('../pages/PartnerLoginPage');
 const AcceptDirectRequest = require('../pages/AcceptDirectRequest');

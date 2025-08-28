@@ -22,6 +22,7 @@ class EventEditPage extends BasePage {
   await this.page.locator('(//button[contains(@class,"h-[35px]")])[1]').click();
   await this.page.waitForTimeout(1000);
   await this.page.goBack();
+  await this.page.waitForTimeout(1000);
   }
 }
 module.exports = EventEditPage;
