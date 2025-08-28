@@ -12,16 +12,16 @@ class EventCancelPage extends BasePage {
 
   async cancelEvent() {
 
-    await this.waitForVisible(this.cancelEventBtn);
-    await this.click(this.cancelEventBtn);
-    await this.waitForVisible(this.checkboxLabel);
-    await this.click(this.checkboxLabel);
-    await this.waitForVisible(this.cancelConfirmBtn);
-    await this.click(this.cancelConfirmBtn);
-    await this.waitForVisible(this.cancelConfirmBtn);
-    await this.click(this.cancelConfirmBtn);
-    await this.waitForVisible(this.backToEvents);
-    await this.click(this.backToEvents);
+  await this.waitForVisible(this.cancelEventBtn);
+  await this.click(this.cancelEventBtn);
+  await this.waitForVisible(this.checkboxLabel);
+  await this.click(this.checkboxLabel);
+  await this.waitForVisible(this.cancelConfirmBtn);
+  await this.click(this.cancelConfirmBtn);
+  // The next waitForVisible(this.cancelConfirmBtn) is already present, do not duplicate
+  await this.click(this.cancelConfirmBtn);
+  await this.waitForVisible(this.backToEvents);
+  await this.click(this.backToEvents);
   }
 }
 

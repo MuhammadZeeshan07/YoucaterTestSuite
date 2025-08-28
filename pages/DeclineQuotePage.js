@@ -13,23 +13,23 @@ class DeclineQuotePage extends BasePage {
     }
 
     async declineQuote() {
-        await this.waitForVisible(this.eventTitle);
-        await this.click(this.eventTitle);
+    await this.waitForVisible(this.eventTitle);
+    await this.click(this.eventTitle);
 
-        await this.waitForVisible(this.acceptCheckoutBtn);
-        await this.click(this.acceptCheckoutBtn);
+    await this.waitForVisible(this.acceptCheckoutBtn);
+    await this.click(this.acceptCheckoutBtn);
 
-        await this.waitForVisible(this.acceptAndCheckoutLink);
-        await this.click(this.acceptAndCheckoutLink);
+    await this.waitForVisible(this.acceptAndCheckoutLink);
+    await this.click(this.acceptAndCheckoutLink);
 
-        await this.waitForVisible(this.declineQuoteBtn);
-        await this.click(this.declineQuoteBtn);
+    await this.waitForVisible(this.declineQuoteBtn);
+    await this.click(this.declineQuoteBtn);
 
-        await this.waitForVisible(this.selectReason);
-        await this.click(this.selectReason);
+    await this.waitForVisible(this.selectReason);
+    await this.click(this.selectReason);
 
-        await this.waitForVisible(this.declineBidModal);
-        await this.click(this.declineBidModal);
+    await this.waitForVisible(this.declineBidModal);
+    await this.click(this.declineBidModal);
     }
 }
 

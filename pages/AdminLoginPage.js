@@ -9,15 +9,18 @@ class AdminLoginPage extends BasePage {
   }
 
   async login(email, password) {
-    await this.waitForVisible(this.emailInput);
-    await this.page.locator(this.emailInput).scrollIntoViewIfNeeded();
-    await this.fill(this.emailInput, email);
-    await this.waitForVisible(this.passwordInput);
-    await this.page.locator(this.passwordInput).scrollIntoViewIfNeeded();
-    await this.fill(this.passwordInput, password);
-    await this.waitForVisible(this.continueBtn);
-    await this.page.locator(this.continueBtn).scrollIntoViewIfNeeded();
-    await this.click(this.continueBtn);
+  await this.waitForVisible(this.emailInput);
+  await this.page.locator(this.emailInput).scrollIntoViewIfNeeded();
+  await this.waitForVisible(this.emailInput);
+  await this.fill(this.emailInput, email);
+  await this.waitForVisible(this.passwordInput);
+  await this.page.locator(this.passwordInput).scrollIntoViewIfNeeded();
+  await this.waitForVisible(this.passwordInput);
+  await this.fill(this.passwordInput, password);
+  await this.waitForVisible(this.continueBtn);
+  await this.page.locator(this.continueBtn).scrollIntoViewIfNeeded();
+  await this.waitForVisible(this.continueBtn);
+  await this.click(this.continueBtn);
   }
 }
 

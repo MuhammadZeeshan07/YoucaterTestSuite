@@ -46,9 +46,11 @@ class AcceptAIDirectRequestPage extends BasePage {
     await this.page.waitForTimeout(5000);
 
     await this.waitForVisible(this.quoteAmountInput);
+    await this.waitForVisible(this.quoteAmountInput);
     await this.fill(this.quoteAmountInput, amount);
 
     await this.waitForVisible(this.attachQuoteBtn);
+    await this.waitForVisible(this.fileInput);
     await this.page.setInputFiles(this.fileInput, filePath);
     await this.page.waitForTimeout(2000);
 

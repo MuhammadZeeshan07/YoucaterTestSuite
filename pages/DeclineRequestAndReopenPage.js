@@ -60,7 +60,8 @@ class DeclineRequestAndReopenPage extends BasePage {
     await this.click(this.myQuoteTab);
 
     await this.page.waitForTimeout(2000);
-    await this.waitForVisible(this.myQuoteTab);
+    // Only add wait if not already present before click
+    // The previous waitForVisible(this.myQuoteTab) is already present
     await this.click(this.myQuoteTab);
 
     await this.page.waitForTimeout(2000);

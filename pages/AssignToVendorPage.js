@@ -14,28 +14,29 @@ class AssignToVendorPage extends BasePage {
 
   async assignEventToVendor() {
 
-    await this.page.waitForTimeout(5000);
-    await this.waitForVisible(this.b2CMenu);
-    await this.click(this.b2CMenu);
-    await this.page.waitForTimeout(5000);
+  await this.page.waitForTimeout(5000);
+  await this.waitForVisible(this.b2CMenu);
+  await this.waitForVisible(this.b2CMenu);
+  await this.click(this.b2CMenu);
+  await this.page.waitForTimeout(5000);
 
-    await this.waitForVisible(this.activeEvents);
-    await this.click(this.activeEvents);
+  await this.waitForVisible(this.activeEvents);
+  await this.click(this.activeEvents);
 
-    await this.waitForVisible(this.selectEvent);
-    await this.click(this.selectEvent);
+  await this.waitForVisible(this.selectEvent);
+  await this.click(this.selectEvent);
 
-    await this.waitForVisible(this.assignEventBtn);
-    await this.click(this.assignEventBtn);
+  await this.waitForVisible(this.assignEventBtn);
+  await this.click(this.assignEventBtn);
 
-    await this.waitForVisible(this.searchVendor);
-    await this.fill(this.searchVendor, 'Ambala');
+  await this.waitForVisible(this.searchVendor);
+  await this.fill(this.searchVendor, 'Ambala');
 
-    await this.waitForVisible(this.selectVendor);
-    await this.click(this.selectVendor);
+  await this.waitForVisible(this.selectVendor);
+  await this.click(this.selectVendor);
 
-    await this.waitForVisible(this.sendVendor);
-    await this.click(this.sendVendor);
+  await this.waitForVisible(this.sendVendor);
+  await this.click(this.sendVendor);
   }
 }
 
