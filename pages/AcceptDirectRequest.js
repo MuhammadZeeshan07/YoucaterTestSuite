@@ -4,6 +4,7 @@ class AcceptDirectRequestPage extends BasePage {
   constructor(page) {
     super(page);
     this.activeEventsTab = 'xpath=//span[contains(text(),"Active Events")]';
+    this.consumerTab = 'xpath=//span[contains(text(),"Consumer")]';
     this.userDirectRequestTab = 'xpath=//span[contains(text(),"User Direct Request")]';
     this.firstRow = "//div[contains(@class,'MuiDataGrid-virtualScrollerRenderZone')]/div[@data-rowindex='0']";
     this.acceptRequestBtn = 'xpath=//button[contains(text(),"Accept Request")]';
@@ -23,8 +24,8 @@ class AcceptDirectRequestPage extends BasePage {
   }
 
   async acceptAndSubmitQuote(filePath, amount = '1234', comments = 'Test Comments') {
-    await this.waitForVisible(this.activeEventsTab);
-    await this.click(this.activeEventsTab);
+    // await this.waitForVisible(this.activeEventsTab);
+    // await this.click(this.activeEventsTab);
 
     await this.page.waitForTimeout(2000);
     await this.waitForVisible(this.userDirectRequestTab);

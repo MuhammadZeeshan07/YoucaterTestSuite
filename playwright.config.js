@@ -28,7 +28,8 @@ module.exports = defineConfig({
         '--disable-renderer-backgrounding'
       ],
     },
-    viewport: { width: 1920, height: 1080 },
+    //viewport: { width: 1920, height: 1080 },
+    viewport: null,
     isMobile: false,
     trace: 'on-first-retry', // Enable trace on first retry for debugging
   },
