@@ -43,6 +43,8 @@ class AcceptQuotePage extends BasePage {
     await this.fill(this.stripeCvc, '100');
     await this.waitForVisible(this.checkoutName);
     await this.fill(this.checkoutName, 'Test card');
+    await this.waitForVisible('select#billingCountry');
+    await this.page.selectOption('select#billingCountry', { value: 'PK' });
     await this.waitForVisible(this.checkoutAddress1);
     await this.fill(this.checkoutAddress1, 'test');
     await this.waitForVisible(this.checkoutAddress2);
