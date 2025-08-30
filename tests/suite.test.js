@@ -16,6 +16,7 @@ const EventCreationWithoutSubmissionPage = require('../pages/EventCreationWithou
 const AssignToVendorPage = require('../pages/AssignToVendorPage');
 const AcceptAIDirectRequestPage = require('../pages/AcceptAIDirectRequestPage');
 const CreateRFPPage = require('../pages/CreateRFPPage');
+const GetCorporateEventDetailsPage= require('../pages/GetCorporateEventDetailsPage')
 const testData = require('../utils/testData');
 const path = require('path');
 
@@ -172,4 +173,11 @@ test.describe.serial('YouCater End-to-End Suite', () => {
     const createRFP = new CreateRFPPage(adminPage);
     await createRFP.createRFPEvent();
   });
+
+  test('Get RFP and View Details', async () => {
+    const getEventDetails = new GetCorporateEventDetailsPage(adminPage);
+    await getEventDetails.getEventDetails();
+  });
+
+
 });

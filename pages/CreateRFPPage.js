@@ -63,7 +63,7 @@ class CreateRFPPage extends BasePage {
         this.saveDraftConfirmation = 'xpath=//*[contains(@class,"MuiAlert-message") and contains(text(),"Draft saved successfully")]';
 
         //Event draft locators
-        this.openDraft = 'xpath=(//div[contains(@class,"eventDraftCard")][   .//p[contains(@class,"eventDraftCardTitle") and normalize-space(text())="Automation Test RFP"]   and    .//p[normalize-space(text())="Step 3/3 completed"] ])[1]';
+        this.openDraft = 'xpath=(//div[contains(@class,"eventDraftCard")][.//p[contains(@class,"eventDraftCardTitle") and normalize-space(text())="Automation Test RFP"]   and    .//p[normalize-space(text())="Step 3/3 completed"]])[1]';
         this.submitRFPButton = 'xpath=//button[contains(@class,"addCorporateModalNextBtn") and contains(text(),"Submit")]';
 
         //Assign to vendor locators
