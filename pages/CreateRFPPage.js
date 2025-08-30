@@ -1,9 +1,12 @@
 const BasePage = require('./BasePage');
+const path = require('path');
+const fileToUpload = path.resolve(__dirname, '../utils/Sample.pdf');
 
 class CreateRFPPage extends BasePage {
     constructor(page) {
         super(page);
 
+        // Event Details selectors
         this.b2BMenu = 'xpath=//*[contains(text(),"B2B")]';
         this.corporateEventsSubMenu = 'xpath=//*[contains(text(),"Active Events (RFPS)")]';
         this.planEventButton = 'button.planEventButton';
@@ -34,22 +37,18 @@ class CreateRFPPage extends BasePage {
         this.endTimeValue = 'xpath=//ul[contains(@class, "react-datepicker__time-list")]/li[2]';
         this.typeofProvider = 'xpath=//input[contains(@type,"radio") and contains(@value,"CATERERS")]';
         this.additionalInfoInput = 'xpath=(//*[contains(@placeholder,"Add any additional information")])[1]';
-        this.uploadAttachmentsButton = '';
+        
+        // Additional Details selectors
+        this.uploadAttachmentsButton = '#attachmentsInput';
+
 
 
         this.addDayButton = 'button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButton-colorPrimary.coreBtn.dayHeaderButton.css-qldyz3';
         this.saveDayButton = 'button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.coreBtn.undefined.css-z22kgn';
         this.addToAllDaysButton = 'button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedInherit.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButton-colorInherit.coreBtn.button.addToAllDays.css-1av6lzk';
 
-        // Notes and Attachments selectors
-        this.notesInput = '#\\:r6i\\:';
-        this.uploadAttachmentsButton = 'button.MuiButtonBase-root.MuiButton-root.MuiButton-text.MuiButton-textPrimary.MuiButton-sizeMedium.MuiButton-textSizeMedium.MuiButton-colorPrimary.coreBtn.uploadAttachmentsBtn.css-1f8j77f';
 
-        // Budget Review selectors
-        this.budgetEditButton = 'div.editButton.MuiBox-root.css-0 > svg';
-        this.budgetAmountInput = '#\\:r7r\\:';
-
-        // Final Review selectors
+        // Summary selectors
         this.saveDraftButton = 'div.addCorporateModalFooterRightContainer.MuiBox-root.css-0 > button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSecondary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButton-colorSecondary.coreBtn.addCorporateModalBtn.css-l1nix0';
         this.submitRFPButton = 'button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.coreBtnPill.assign_event_vendor_modal_footer.css-jau75b';
 
@@ -157,7 +156,12 @@ class CreateRFPPage extends BasePage {
         await this.click(this.nextButton);
         await this.click(this.additionalInfoInput);
         await this.fill(this.additionalInfoInput, 'Some additional information');
-        
+        await this.waitForVisible(this.uploadAttachmentsButton);
+        await this.page.setInputFiles(this.uploadAttachmentsButton, fileToUpload);
+        await this.page.waitForTimeout(2000);
+        await this.page.locator(this.nextButton).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.nextButton);
+        await this.click(this.nextButton);
     }
 }
 
