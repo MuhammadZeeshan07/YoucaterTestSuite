@@ -25,5 +25,30 @@ class BasePage {
   async assertText(selector, expected) {
     await expect(this.page.locator(selector)).toHaveText(expected);
   }
+
+  async selectDate(inputSelector, daysFromToday) {
+    await this.page.locator(inputSelector).scrollIntoViewIfNeeded();
+    await this.waitForVisible(inputSelector);
+    await this.click(inputSelector);
+
+    const today = new Date();
+    const targetDate = new Date(today);
+    targetDate.setDate(today.getDate() + daysFromToday);
+    const targetDay = targetDate.getDate();
+    const targetMonth = targetDate.toLocaleString('default', { month: 'long' });
+    const targetYear = targetDate.getFullYear();
+    const targetMonthYear = `${targetMonth} ${targetYear}`;
+
+    await this.page.waitForSelector('.react-datepicker');
+    while (true) {
+      const currentMonthYear = await this.page.locator('.react-datepicker__current-month').innerText();
+      if (currentMonthYear === targetMonthYear) break;
+      await this.page.locator('.react-datepicker__navigation--next').click();
+      await this.page.waitForTimeout(500);
+    }
+
+    const daySelector = `.react-datepicker__day--0${targetDay.toString().padStart(2, '0')}:not(.react-datepicker__day--disabled)`;
+    await this.page.locator(daySelector).first().click();
+  }
 }
 module.exports = BasePage;

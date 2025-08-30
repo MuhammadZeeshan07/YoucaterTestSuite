@@ -11,7 +11,7 @@ test('Vendor accepts direct request and submits quote', async ({ page }) => {
     await loginPage.login(email, password);
 
     const acceptPage = new AcceptDirectRequestPage(page);
-        const fileToUpload = path.resolve(__dirname, '../utils/Sample.pdf');
+    const fileToUpload = path.resolve(__dirname, '../utils/Sample.pdf');
     await acceptPage.acceptAndSubmitQuote(fileToUpload, '1234', 'Test Comments');
 
 });

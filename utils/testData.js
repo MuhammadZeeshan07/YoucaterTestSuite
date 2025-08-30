@@ -14,7 +14,7 @@ module.exports = {
   // Admin credentials for admin app
   ADMIN: {
     url: 'https://admin-dev.youcater.me/',
-    email: 'amal.nadeem@glowfishlabs.com',
+    email: 'enhancecvemail@gmail.com',
     password: '123456'
   }
 };
