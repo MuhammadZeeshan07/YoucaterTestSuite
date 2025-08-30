@@ -1,6 +1,7 @@
 const BasePage = require('./BasePage');
 const path = require('path');
-const fileToUpload = path.resolve(__dirname, '../utils/Sample.pdf');
+const uploadPdf = path.resolve(__dirname, '../utils/Sample.pdf');
+const uploadImage = path.resolve(__dirname, '../utils/TestImage.jpg');
 
 class CreateRFPPage extends BasePage {
     constructor(page) {
@@ -37,7 +38,7 @@ class CreateRFPPage extends BasePage {
         this.endTimeValue = 'xpath=//ul[contains(@class, "react-datepicker__time-list")]/li[2]';
         this.typeofProvider = 'xpath=//input[contains(@type,"radio") and contains(@value,"CATERERS")]';
         this.additionalInfoInput = 'xpath=(//*[contains(@placeholder,"Add any additional information")])[1]';
-        
+
         // Additional Details selectors
         this.uploadAttachmentsButton = '#attachmentsInput';
 
@@ -49,9 +50,28 @@ class CreateRFPPage extends BasePage {
 
 
         // Summary selectors
-        this.saveDraftButton = 'div.addCorporateModalFooterRightContainer.MuiBox-root.css-0 > button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedSecondary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButton-colorSecondary.coreBtn.addCorporateModalBtn.css-l1nix0';
-        this.submitRFPButton = 'button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.coreBtnPill.assign_event_vendor_modal_footer.css-jau75b';
+        this.editEventDetail = 'xpath=(//*[contains(@class,"editButton")])[1]';
+        this.editLocationDetail = 'xpath=(//*[contains(@class,"editButton")])[4]';
+        this.cloneDay = 'xpath=(//button[contains(text(),"Clone day")])[1]';
+        this.confirmationModal = 'xpath=//button[contains(text(),"Confirm")]';
+        this.cloneDayAssertion = 'xpath=//p[contains(text(), "Day 2")]';
+        this.cloneLocation = 'xpath=(//button[contains(text(),"Clone this location")])[1]';
+        this.cloneLocationAssertion = 'xpath=//p[contains(text(), "Location 2")]';
+        this.addDay = 'xpath=//*[contains(@class, "addCorporateEventFormDayAddBtn")]';
+        this.addDayAssertion = 'xpath=//p[contains(text(), "Day 3")]';
+        this.applyToAllDays = 'xpath=//button[contains(text(), "Apply to all days")]';
+        this.addLocationToAllDays = 'xpath=(//button[contains(text(), "Add this location to all days")])[1]';
+        this.selectDay2 = 'xpath=//*[contains(@class, "addCorporateEventFormDays")]/div[2]';
+        this.day2SelectionAssertion = 'xpath=//*[contains(@class,"dayDetailsHeaderLeft")]/p[normalize-space(.)="Day 2 Details"]';
+        this.selectDay3 = 'xpath=//*[contains(@class, "addCorporateEventFormDays")]/div[3]';
+        this.day3SelectionAssertion = 'xpath=//*[contains(@class,"dayDetailsHeaderLeft")]/p[normalize-space(.)="Day 3 Details"]';
+        this.editAdditionalDetail = 'xpath=(//*[contains(@class,"editButton")])[6]';
+        this.saveDraftButton = 'xpath=//*[contains(@class,"addCorporateModalBtn") and contains(text(),"Save draft")]';
+        this.saveDraftConfirmation = 'xpath=//*[contains(@class,"MuiTypography-root") and contains(text(),"Draft saved successfully")]';
 
+        //Event draft locators
+        this.openDraft = 'xpath=(//div[contains(@class,"eventDraftCard")][   .//p[contains(@class,"eventDraftCardTitle") and normalize-space(text())="Automation Test RFP"]   and    .//p[normalize-space(text())="Step 3/3 completed"] ])[1]';
+        this.submitRFPButton = 'xpath=//button[contains(@class,"MuiButtonBase-root") and contains(@class,"MuiButton-root") and contains(@class,"MuiButton-contained") and contains(@class,"MuiButton-containedPrimary") and contains(@class,"MuiButton-sizeMedium") and contains(@class,"MuiButton-containedSizeMedium") and contains(@class,"MuiButton-colorPrimary") and contains(@class,"coreBtnPill") and contains(@class,"assign_event_vendor_modal_footer") and contains(@class,"css-jau75b")]';
     }
 
     async selectMeals(meals = []) {
@@ -64,6 +84,7 @@ class CreateRFPPage extends BasePage {
 
     async createRFPEvent() {
 
+        // Event Details actions
         await this.waitForVisible(this.b2BMenu);
         await this.page.locator(this.b2BMenu).scrollIntoViewIfNeeded();
         await this.click(this.b2BMenu);
@@ -75,7 +96,7 @@ class CreateRFPPage extends BasePage {
         await this.click(this.planEventButton);
         await this.page.locator(this.eventNameInput).scrollIntoViewIfNeeded();
         await this.waitForVisible(this.eventNameInput);
-        await this.fill(this.eventNameInput, 'Test RFP');
+        await this.fill(this.eventNameInput, 'Automation Test RFP');
         await this.page.locator(this.addClientButton).scrollIntoViewIfNeeded();
         await this.waitForVisible(this.addClientButton);
         await this.click(this.addClientButton);
@@ -113,6 +134,8 @@ class CreateRFPPage extends BasePage {
         await this.page.locator(this.nextButton).scrollIntoViewIfNeeded();
         await this.waitForVisible(this.nextButton);
         await this.click(this.nextButton);
+
+        // Location Details actions
         await this.page.locator(this.locationInput).scrollIntoViewIfNeeded();
         await this.waitForVisible(this.locationInput);
         await this.fill(this.locationInput, 'Test Location');
@@ -154,14 +177,121 @@ class CreateRFPPage extends BasePage {
         await this.page.locator(this.nextButton).scrollIntoViewIfNeeded();
         await this.waitForVisible(this.nextButton);
         await this.click(this.nextButton);
+
+        // Additional Details actions
         await this.click(this.additionalInfoInput);
         await this.fill(this.additionalInfoInput, 'Some additional information');
         await this.waitForVisible(this.uploadAttachmentsButton);
-        await this.page.setInputFiles(this.uploadAttachmentsButton, fileToUpload);
+        await this.page.setInputFiles(this.uploadAttachmentsButton, uploadPdf);
         await this.page.waitForTimeout(2000);
         await this.page.locator(this.nextButton).scrollIntoViewIfNeeded();
         await this.waitForVisible(this.nextButton);
         await this.click(this.nextButton);
+
+        // Edit Event details actions
+        await this.page.locator(this.editEventDetail).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.editEventDetail);
+        await this.click(this.editEventDetail);
+        await this.page.waitForTimeout(2000);
+        await this.page.locator(this.paymentTermsInput).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.paymentTermsInput);
+        await this.fill(this.paymentTermsInput, '');
+        await this.fill(this.paymentTermsInput, '80');
+        await this.page.locator(this.nextButton).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.nextButton);
+        await this.click(this.nextButton);
+
+        // Edit Location details actions
+        await this.page.locator(this.editLocationDetail).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.editLocationDetail);
+        await this.click(this.editLocationDetail);
+        await this.page.locator(this.cloneDay).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.cloneDay);
+        await this.click(this.cloneDay);
+        await this.page.locator(this.confirmationModal).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.confirmationModal);
+        await this.click(this.confirmationModal);
+        await this.waitForVisible(this.cloneDayAssertion);
+        await this.page.locator(this.cloneDayAssertion).scrollIntoViewIfNeeded();
+        await this.page.locator(this.cloneDayAssertion).waitFor({ state: 'visible' });
+        await this.page.locator(this.cloneLocation).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.cloneLocation);
+        await this.click(this.cloneLocation);
+        await this.page.locator(this.confirmationModal).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.confirmationModal);
+        await this.click(this.confirmationModal);
+        await this.waitForVisible(this.cloneLocationAssertion);
+        await this.page.locator(this.cloneLocationAssertion).scrollIntoViewIfNeeded();
+        await this.page.locator(this.cloneLocationAssertion).waitFor({ state: 'visible' });
+        await this.page.locator(this.addDay).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.addDay);
+        await this.click(this.addDay);
+        await this.page.locator(this.confirmationModal).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.confirmationModal);
+        await this.click(this.confirmationModal);
+        await this.waitForVisible(this.addDayAssertion);
+        await this.page.locator(this.addDayAssertion).scrollIntoViewIfNeeded();
+        await this.page.locator(this.addDayAssertion).waitFor({ state: 'visible' });
+        await this.page.locator(this.applyToAllDays).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.applyToAllDays);
+        await this.click(this.applyToAllDays);
+        await this.page.locator(this.confirmationModal).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.confirmationModal);
+        await this.click(this.confirmationModal);
+        await this.page.locator(this.addLocationToAllDays).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.addLocationToAllDays);
+        await this.click(this.addLocationToAllDays);
+        await this.page.locator(this.confirmationModal).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.confirmationModal);
+        await this.click(this.confirmationModal);
+        await this.page.locator(this.selectDay2).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.selectDay2);
+        await this.click(this.selectDay2);
+        await this.waitForVisible(this.day2SelectionAssertion);
+        await this.page.locator(this.day2SelectionAssertion).scrollIntoViewIfNeeded();
+        await this.page.locator(this.day2SelectionAssertion).waitFor({ state: 'visible' });
+        await this.page.locator(this.eventStartDateInput).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.eventStartDateInput);
+        await this.click(this.eventStartDateInput);
+        await this.selectDate(this.eventStartDateInput, 6);
+        await this.page.locator(this.selectDay3).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.selectDay3);
+        await this.click(this.selectDay3);
+        await this.waitForVisible(this.day3SelectionAssertion);
+        await this.page.locator(this.day3SelectionAssertion).scrollIntoViewIfNeeded();
+        await this.page.locator(this.day3SelectionAssertion).waitFor({ state: 'visible' });
+        await this.page.locator(this.eventStartDateInput).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.eventStartDateInput);
+        await this.click(this.eventStartDateInput);
+        await this.selectDate(this.eventStartDateInput, 7);
+        await this.page.locator(this.nextButton).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.nextButton);
+        await this.click(this.nextButton);
+
+        // Edit Additional details actions
+        await this.page.locator(this.editAdditionalDetail).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.editAdditionalDetail);
+        await this.click(this.editAdditionalDetail);
+        await this.waitForVisible(this.uploadAttachmentsButton);
+        await this.page.setInputFiles(this.uploadAttachmentsButton, uploadImage);
+        await this.page.waitForTimeout(2000);
+        await this.page.locator(this.nextButton).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.nextButton);
+        await this.click(this.nextButton);
+
+        //Save Draft actions
+        await this.page.locator(this.saveDraftButton).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.saveDraftButton);
+        await this.click(this.saveDraftButton);
+        await this.waitForVisible(this.saveDraftConfirmation);
+        await this.page.locator(this.saveDraftConfirmation).scrollIntoViewIfNeeded();
+        await this.page.locator(this.saveDraftConfirmation).waitFor({ state: 'visible' });
+        await this.page.waitForTimeout(1000);
+        await this.page.locator(this.openDraft).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.openDraft);
+        await this.click(this.openDraft);
+        await this.page.waitForTimeout(1000);
+
     }
 }
 
