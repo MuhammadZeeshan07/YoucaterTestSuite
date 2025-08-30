@@ -42,13 +42,6 @@ class CreateRFPPage extends BasePage {
         // Additional Details selectors
         this.uploadAttachmentsButton = '#attachmentsInput';
 
-
-
-        this.addDayButton = 'button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButton-colorPrimary.coreBtn.dayHeaderButton.css-qldyz3';
-        this.saveDayButton = 'button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButton-colorPrimary.coreBtn.undefined.css-z22kgn';
-        this.addToAllDaysButton = 'button.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.MuiButton-outlinedInherit.MuiButton-sizeMedium.MuiButton-outlinedSizeMedium.MuiButton-colorInherit.coreBtn.button.addToAllDays.css-1av6lzk';
-
-
         // Summary selectors
         this.editEventDetail = 'xpath=(//*[contains(@class,"editButton")])[1]';
         this.editLocationDetail = 'xpath=(//*[contains(@class,"editButton")])[4]';
@@ -67,11 +60,19 @@ class CreateRFPPage extends BasePage {
         this.day3SelectionAssertion = 'xpath=//*[contains(@class,"dayDetailsHeaderLeft")]/p[normalize-space(.)="Day 3 Details"]';
         this.editAdditionalDetail = 'xpath=(//*[contains(@class,"editButton")])[6]';
         this.saveDraftButton = 'xpath=//*[contains(@class,"addCorporateModalBtn") and contains(text(),"Save draft")]';
-        this.saveDraftConfirmation = 'xpath=//*[contains(@class,"MuiTypography-root") and contains(text(),"Draft saved successfully")]';
+        this.saveDraftConfirmation = 'xpath=//*[contains(@class,"MuiAlert-message") and contains(text(),"Draft saved successfully")]';
 
         //Event draft locators
         this.openDraft = 'xpath=(//div[contains(@class,"eventDraftCard")][   .//p[contains(@class,"eventDraftCardTitle") and normalize-space(text())="Automation Test RFP"]   and    .//p[normalize-space(text())="Step 3/3 completed"] ])[1]';
-        this.submitRFPButton = 'xpath=//button[contains(@class,"MuiButtonBase-root") and contains(@class,"MuiButton-root") and contains(@class,"MuiButton-contained") and contains(@class,"MuiButton-containedPrimary") and contains(@class,"MuiButton-sizeMedium") and contains(@class,"MuiButton-containedSizeMedium") and contains(@class,"MuiButton-colorPrimary") and contains(@class,"coreBtnPill") and contains(@class,"assign_event_vendor_modal_footer") and contains(@class,"css-jau75b")]';
+        this.submitRFPButton = 'xpath=//button[contains(@class,"addCorporateModalNextBtn") and contains(text(),"Submit")]';
+
+        //Assign to vendor locators
+        this.searchVendor = '#select_vendors';
+        this.selectVendor = 'xpath=(//div[contains(@class,"assign_vendor_list_hold")]/div)[1]';
+        this.sendVendor = 'xpath=//button[contains(text(),"Send vendor")]';
+        this.eventCreationConfirmation = 'xpath=//*[contains(@class,"MuiAlert-message") and contains(text(),"Event created and assigned successfully")]';
+
+        
     }
 
     async selectMeals(meals = []) {
@@ -290,6 +291,23 @@ class CreateRFPPage extends BasePage {
         await this.page.locator(this.openDraft).scrollIntoViewIfNeeded();
         await this.waitForVisible(this.openDraft);
         await this.click(this.openDraft);
+        await this.page.waitForTimeout(1000);
+        await this.page.locator(this.submitRFPButton).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.submitRFPButton);
+        await this.click(this.submitRFPButton);
+        await this.page.waitForTimeout(1000);
+
+        //Assign to vendor actions
+        await this.waitForVisible(this.searchVendor);
+        await this.fill(this.searchVendor, 'Ambala');
+        await this.waitForVisible(this.selectVendor);
+        await this.click(this.selectVendor);
+        await this.waitForVisible(this.sendVendor);
+        await this.click(this.sendVendor);
+        await this.page.waitForTimeout(1000);
+        await this.waitForVisible(this.eventCreationConfirmation);
+        await this.page.locator(this.eventCreationConfirmation).scrollIntoViewIfNeeded();
+        await this.page.locator(this.eventCreationConfirmation).waitFor({ state: 'visible' });
         await this.page.waitForTimeout(1000);
 
     }
