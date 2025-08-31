@@ -16,7 +16,9 @@ const EventCreationWithoutSubmissionPage = require('../pages/EventCreationWithou
 const AssignToVendorPage = require('../pages/AssignToVendorPage');
 const AcceptAIDirectRequestPage = require('../pages/AcceptAIDirectRequestPage');
 const CreateRFPPage = require('../pages/CreateRFPPage');
-const GetCorporateEventDetailsPage= require('../pages/GetCorporateEventDetailsPage')
+const GetCorporateEventDetailsPage = require('../pages/GetCorporateEventDetailsPage')
+const VendorGetRFPandQuotePage = require('../pages/VendorGetRFPandQuotePage');
+
 const testData = require('../utils/testData');
 const path = require('path');
 
@@ -63,13 +65,13 @@ test.describe.serial('YouCater End-to-End Suite', () => {
   //   await directRequestPage.sendDirectRequestFlow();
   // });
 
-  // test('Partner Login', async () => {
-  //   partnerContext = await browser.newContext();
-  //   partnerPage = await partnerContext.newPage();
-  //   const partnerLoginPage = new PartnerLoginPage(partnerPage);
-  //   await partnerLoginPage.navigate(PARTNER.url);
-  //   await partnerLoginPage.login(PARTNER.email, PARTNER.password);
-  // });
+  test('Partner Login', async () => {
+    partnerContext = await browser.newContext();
+    partnerPage = await partnerContext.newPage();
+    const partnerLoginPage = new PartnerLoginPage(partnerPage);
+    await partnerLoginPage.navigate(PARTNER.url);
+    await partnerLoginPage.login(PARTNER.email, PARTNER.password);
+  });
 
   // test('Accept the Direct Request', async () => {
   //   const acceptDirectRequestPage = new AcceptDirectRequest(partnerPage);
@@ -174,10 +176,16 @@ test.describe.serial('YouCater End-to-End Suite', () => {
     await createRFP.createRFPEvent();
   });
 
-  test('Get RFP and View Details', async () => {
-    const getEventDetails = new GetCorporateEventDetailsPage(adminPage);
-    await getEventDetails.getEventDetails();
+  
+  test('Vendor get corporate RFP and submits quote', async () => {
+    const getRFPandQuote = new VendorGetRFPandQuotePage(partnerPage);
+    await getRFPandQuote.getEventDetailsAndSendQuote();
   });
+
+  // test('Get RFP and View Details', async () => {
+  //   const getEventDetails = new GetCorporateEventDetailsPage(adminPage);
+  //   await getEventDetails.getEventDetails();
+  // });
 
 
 });

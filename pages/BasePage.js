@@ -50,5 +50,11 @@ class BasePage {
     const daySelector = `.react-datepicker__day--0${targetDay.toString().padStart(2, '0')}:not(.react-datepicker__day--disabled)`;
     await this.page.locator(daySelector).first().click();
   }
+
+  async assertToastMessageVisible(messageText) {
+  const toastSelector = `//*[contains(@class,"MuiAlert-message") and contains(text(),"${messageText}")]`;
+  await expect(this.page.locator(toastSelector)).toBeVisible({ timeout: 20000 });
+}
+
 }
 module.exports = BasePage;

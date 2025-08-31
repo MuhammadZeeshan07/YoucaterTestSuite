@@ -7,13 +7,13 @@ class AcceptAIDirectRequestPage extends BasePage {
     this.userAIDirectRequestTab = 'xpath=//span[contains(text(),"AI Direct Request")]';
     this.firstRow = "//div[contains(@class,'MuiDataGrid-virtualScrollerRenderZone')]/div[@data-rowindex='0']";
     this.acceptRequestBtn = 'xpath=//button[contains(text(),"Send a quote")]';
-    this.quoteAmountInput = '#quoteAmount';
-    this.fileInput = 'xpath=//input[@type="file"]';
-    this.attachQuoteBtn = 'xpath=//*[contains(@class,"attachQuoteBtn")]';
-    this.notApplicableBtn = 'xpath=//button[text()="Not applicable"]';
-    this.notVatRegisteredBtn = "xpath=//button[text()=\"I’m not VAT registered\"]";
-    this.additionalCommentsInput = '#additionalComments';
-    this.submitQuoteBtn = 'xpath=//button[text()="Submit quote"]';
+    // this.quoteAmountInput = '#quoteAmount';
+    // this.fileInput = 'xpath=//input[@type="file"]';
+    // this.attachQuoteBtn = 'xpath=//*[contains(@class,"attachQuoteBtn")]';
+    // this.notApplicableBtn = 'xpath=//button[text()="Not applicable"]';
+    // this.notVatRegisteredBtn = "xpath=//button[text()=\"I’m not VAT registered\"]";
+    // this.additionalCommentsInput = '#additionalComments';
+    // this.submitQuoteBtn = 'xpath=//button[text()="Submit quote"]';
     this.goToChat = 'xpath=//button[contains(text(),"Go to chat")]';
     this.sendMessage = '#sendbird-message-input-text-field';
     this.eventDirectory = 'xpath=//span[contains(text(), "Event Directory")]';
@@ -21,7 +21,7 @@ class AcceptAIDirectRequestPage extends BasePage {
 
   }
 
-  async acceptAndSubmitQuote(filePath, amount = '1234', comments = 'Test Comments') {
+  async acceptAndSubmitQuote() {
     
     // await this.waitForVisible(this.eventDirectory);
     // await this.click(this.eventDirectory);
@@ -45,33 +45,47 @@ class AcceptAIDirectRequestPage extends BasePage {
     await this.click(this.acceptRequestBtn);
     await this.page.waitForTimeout(5000);
 
-    await this.waitForVisible(this.quoteAmountInput);
-    await this.waitForVisible(this.quoteAmountInput);
-    await this.fill(this.quoteAmountInput, amount);
+    // await this.waitForVisible(this.quoteAmountInput);
+    // await this.waitForVisible(this.quoteAmountInput);
+    // await this.fill(this.quoteAmountInput, amount);
 
-    await this.waitForVisible(this.attachQuoteBtn);
-    await this.waitForVisible(this.fileInput);
-    await this.page.setInputFiles(this.fileInput, filePath);
-    await this.page.waitForTimeout(2000);
+    // await this.waitForVisible(this.attachQuoteBtn);
+    // await this.waitForVisible(this.fileInput);
+    // await this.page.setInputFiles(this.fileInput, filePath);
+    // await this.page.waitForTimeout(2000);
 
-    await this.page.evaluate(() => {
-      document.querySelector('div.modalBody')?.scrollBy(0, 300);
-    });
+    // await this.page.evaluate(() => {
+    //   document.querySelector('div.modalBody')?.scrollBy(0, 300);
+    // });
 
-    await this.waitForVisible(this.notApplicableBtn);
-    await this.click(this.notApplicableBtn);
+    // await this.waitForVisible(this.notApplicableBtn);
+    // await this.click(this.notApplicableBtn);
 
-    await this.waitForVisible(this.notVatRegisteredBtn);
-    await this.click(this.notVatRegisteredBtn);
+    // await this.waitForVisible(this.notVatRegisteredBtn);
+    // await this.click(this.notVatRegisteredBtn);
 
-    await this.waitForVisible(this.additionalCommentsInput);
-    await this.fill(this.additionalCommentsInput, comments);
+    // await this.waitForVisible(this.additionalCommentsInput);
+    // await this.fill(this.additionalCommentsInput, comments);
 
-    await this.page.waitForTimeout(2000);
-    await this.waitForVisible(this.submitQuoteBtn);
-    await this.click(this.submitQuoteBtn);
+    // await this.page.waitForTimeout(2000);
+    // await this.waitForVisible(this.submitQuoteBtn);
+    // await this.click(this.submitQuoteBtn);
+    await this.completeQuoteFlow();
+
+
 
   }
+
+  async completeQuoteFlow() {
+    const path = require('path');
+    const filePath = path.resolve(__dirname, '../utils/Sample.pdf');
+    await this.quoteFormPage.submitQuote({
+      amount: '12000',
+      filePath,
+      comments: 'This is an automated quote submission.'
+    });
+  }
+
 }
 
 module.exports = AcceptAIDirectRequestPage;
