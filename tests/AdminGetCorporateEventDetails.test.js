@@ -1,10 +1,10 @@
 const { test } = require('@playwright/test');
-const GetCorporateEventDetailsPage = require('../pages/GetCorporateEventDetailsPage');
+const AdminGetCorporateEventDetailsPage = require('../pages/AdminGetCorporateEventDetailsPage');
 const testData = require('../utils/testData');
 
 test.describe('RFP Detail Flow', () => {
   test('Get RFP and View Details', async ({ page }) => {
-    const getEventDetails = new GetCorporateEventDetailsPage(page);
+    const getEventDetails = new AdminGetCorporateEventDetailsPage(page);
     await getEventDetails.getEventDetails();
 
   });
