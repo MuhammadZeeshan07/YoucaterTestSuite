@@ -29,9 +29,15 @@ class AssignToVendorPage extends BasePage {
   await this.waitForVisible(this.assignEventBtn);
   await this.click(this.assignEventBtn);
 
+  await this.page.waitForTimeout(1000);
+  await this.waitForVisible(this.searchVendor);
+  await this.click(this.searchVendor);
+
+  await this.page.waitForTimeout(1000);
   await this.waitForVisible(this.searchVendor);
   await this.fill(this.searchVendor, 'Ambala');
 
+  await this.page.waitForTimeout(1000);
   await this.waitForVisible(this.selectVendor);
   await this.click(this.selectVendor);
 

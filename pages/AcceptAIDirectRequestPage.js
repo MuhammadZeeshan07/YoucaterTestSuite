@@ -1,8 +1,10 @@
 const BasePage = require('./BasePage');
+const QuoteFormPage = require('./QuoteFormPage');
 
 class AcceptAIDirectRequestPage extends BasePage {
   constructor(page) {
     super(page);
+    this.quoteFormPage = new QuoteFormPage(page);
     this.activeEventsTab = 'xpath=//span[contains(text(),"Active Events")]';
     this.userAIDirectRequestTab = 'xpath=//span[contains(text(),"AI Direct Request")]';
     this.firstRow = "//div[contains(@class,'MuiDataGrid-virtualScrollerRenderZone')]/div[@data-rowindex='0']";

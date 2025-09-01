@@ -36,8 +36,10 @@ class AdminGetCorporateEventDetailsPage extends BasePage {
         await this.waitForVisible(this.assignAdmin);
         await this.page.click(this.assignAdmin);
         await this.interactWithTabsAndVerifyAdditionalInfo();
+        await this.page.waitForTimeout(5000);
         await this.page.locator(this.typeMessage).scrollIntoViewIfNeeded();
         await this.waitForVisible(this.typeMessage);
+        await this.page.waitForTimeout(5000);
         await this.page.fill(this.typeMessage, 'Hello, Thanks for connecting let me review');
         await this.page.click(this.sendMessage);
 

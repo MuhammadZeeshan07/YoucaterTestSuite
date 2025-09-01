@@ -4,7 +4,7 @@ class AcceptQuotePage extends BasePage {
     constructor(page) {
         super(page);
         this.eventTitle = 'xpath=//*[contains(text(),"Start a conversation with vendor")]';
-        this.acceptCheckoutBtn = 'xpath=//*[contains(text(),"View quote")]';
+        this.acceptCheckoutBtn = 'xpath=(//button[contains(text(),"View quote")])[1]';
         this.acceptAndCheckoutLink = 'text=Accept & checkout';
         this.acceptedCheckbox = 'id=acceptedCheckbox';
         this.paymentPanel = 'xpath=//*[contains(text(),"Accept & pay")]';

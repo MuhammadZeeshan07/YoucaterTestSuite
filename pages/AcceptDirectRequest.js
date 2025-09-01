@@ -83,6 +83,7 @@ class AcceptDirectRequestPage extends BasePage {
     // await this.waitForVisible(this.submitQuoteBtn);
     // await this.click(this.submitQuoteBtn);
 
+    await this.page.waitForTimeout(2000);
     await this.completeQuoteFlow();
     
 

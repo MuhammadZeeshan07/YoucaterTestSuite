@@ -1,9 +1,9 @@
 const { defineConfig } = require('@playwright/test');
 module.exports = defineConfig({
   testDir: './tests',
-  timeout: 180 * 1000, // Increased global test timeout
+  timeout: 180 * 1000,
   expect: {
-    timeout: 15000, // Increased expect timeout
+    timeout: 15000,
   },
   //retries: process.env.CI ? 2 : 0, // More retries in CI
   reporter: [

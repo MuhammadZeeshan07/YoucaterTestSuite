@@ -3,7 +3,7 @@ class QuoteFormPage {
     this.page = page;
     
     this.quoteAmountInput = '#quoteAmount';
-    this.fileInput = 'xpath=//input[@type="file"]';
+    this.fileInput = 'xpath=//*[contains(@class,"attachQuoteBtn")]//input[@type="file"]';
     this.attachQuoteBtn = 'xpath=//*[contains(@class,"attachQuoteBtn")]';
     this.notApplicableBtn = 'xpath=//button[text()="Not applicable"]';
     this.notVatRegisteredBtn = 'xpath=//button[text()="I’m not VAT registered"]';
@@ -27,10 +27,12 @@ class QuoteFormPage {
     await this.waitForVisible(this.quoteAmountInput);
     await this.fill(this.quoteAmountInput, amount);
 
-  await this.waitForVisible(this.attachQuoteBtn);
-  const fileInputLocator = this.page.getByLabel('Attach Quote');
-  await fileInputLocator.setInputFiles(filePath);
-  await this.page.waitForTimeout(2000);
+    await this.waitForVisible(this.attachQuoteBtn);
+    // Use robust file input selector and check visibility
+    await this.waitForVisible(this.fileInput);
+    const fileInputLocator = this.page.locator(this.fileInput);
+    await fileInputLocator.setInputFiles(filePath);
+    await this.page.waitForTimeout(2000);
 
     await this.page.evaluate(() => {
       document.querySelector('div.modalBody')?.scrollBy(0, 300);

@@ -70,7 +70,7 @@ class EventCreationPage extends BasePage {
   await this.waitForVisible(this.requestCustomQuotes);
   await this.click(this.requestCustomQuotes);
   await this.waitForVisible(this.eventNameInput);
-  await this.fill(this.eventNameInput, 'Check event');
+  await this.fill(this.eventNameInput, 'Test event');
   await this.waitForVisible(this.locationInput);
   await this.fill(this.locationInput, 'Test location');
   await this.waitForVisible(this.burgersInput);

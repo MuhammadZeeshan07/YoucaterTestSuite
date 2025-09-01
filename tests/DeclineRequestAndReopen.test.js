@@ -2,7 +2,6 @@ const { test } = require('@playwright/test');
 const DeclineRequestAndReopenPage = require('../pages/DeclineRequestAndReopenPage');
 const PartnerLoginPage = require('../pages/PartnerLoginPage');
 const testData = require('../utils/testData');
-const path = require('path');
 
 test('Vendor decline direct request and submits quote', async ({ page }) => {
     const { url, email, password } = testData.PARTNER;
@@ -10,8 +9,7 @@ test('Vendor decline direct request and submits quote', async ({ page }) => {
     await loginPage.navigate(url);
     await loginPage.login(email, password);
 
-        const declinePage = new DeclineRequestAndReopenPage(page);
-        const fileToUpload = path.resolve(__dirname, '../utils/Sample.pdf');
-    await declinePage.declineAndReopen(fileToUpload, '1234', 'Test Comments');
+    const declinePage = new DeclineRequestAndReopenPage(page);
+    await declinePage.declineAndReopen();
 
 });
