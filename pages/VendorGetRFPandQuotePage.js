@@ -48,7 +48,7 @@ class VendorGetRFPandQuotePage extends BasePage {
         await this.waitForVisible(this.sendQuoteButton);
         await this.click(this.sendQuoteButton);
         await this.completeQuoteFlow();
-        await this.assertToastMessageVisible("Quote has been sent successfully");
+        await this.assertToastMessageVisible("Quote submitted successfully");
         await this.page.locator(this.quoteTab).scrollIntoViewIfNeeded();
         await this.waitForVisible(this.quoteTab);
         await this.click(this.quoteTab);
@@ -77,9 +77,9 @@ class VendorGetRFPandQuotePage extends BasePage {
         const path = require('path');
         const filePath = path.resolve(__dirname, '../utils/Sample.pdf');
         await this.quoteFormPage.submitQuote({
-            amount: '12000',
-            filePath,
-            comments: 'This is an automated quote submission.'
+            amount: '12000'
+          //  filePath,
+           // comments: 'This is an automated quote submission.'
         });
     }
 

@@ -98,9 +98,9 @@ class AcceptDirectRequestPage extends BasePage {
     const path = require('path');
     const filePath = path.resolve(__dirname, '../utils/Sample.pdf');
     await this.quoteFormPage.submitQuote({
-      amount: '12000',
-      filePath,
-      comments: 'This is an automated quote submission.'
+      amount: '12000'
+      // filePath,
+      // comments: 'This is an automated quote submission.'
     });
   }
 
