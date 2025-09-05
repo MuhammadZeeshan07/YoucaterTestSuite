@@ -62,11 +62,14 @@ class VendorGetRFPandQuotePage extends BasePage {
         await this.page.waitForSelector('div.quotesHistoryList div.quoteCard');
         const quoteHistoryCardCount = await this.page.locator('div.quotesHistoryList div.quoteCard').count();
         expect(quoteHistoryCardCount).toBeGreaterThan(0);
-        await this.assertToastMessageVisible("Quote has been sent successfully");
+        await this.assertToastMessageVisible("Quote submitted successfully");
+        await this.page.locator(this.quoteTab).scrollIntoViewIfNeeded();
+        await this.waitForVisible(this.quoteTab);
+        await this.click(this.quoteTab);
         await this.page.locator(this.typeMessage).scrollIntoViewIfNeeded();
         await this.waitForVisible(this.typeMessage);
         await this.click(this.typeMessage);
-        await this.fill(this.typeMessage, 'Hello YouCater, Quote has been sent');
+        await this.fill(this.typeMessage, 'Hello YouCater, Quote has been submitted');
         await this.page.waitForTimeout(1000);
         await this.click(this.sendMessage);
         await this.page.waitForTimeout(1000);
